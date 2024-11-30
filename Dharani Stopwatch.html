@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Stop Watch</title>
+        <style>
+            body{
+                background: #f0d7cd;
+                font-family: monospace;
+                font-size: xx-large;
+            }
+            h1{
+                text-align: center;
+                margin-top: 100px ; 
+                justify-content: center;
+
+            }
+            .stopwatch{
+                width:90%;
+                max-width: 600px;
+                background: rgb(255, 255, 255);
+                text-align: center;
+                padding: 30px 20px 70px;
+                color: black;
+                margin:10px auto;
+                box-shadow: 0 2px 7px rgba(164, 161, 161, 0.8);
+                border-radius: 20px;
+            }
+            
+            .buttons
+            {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+            }
+            .buttons img{
+                cursor: pointer;
+                /* padding: 10px 20px; */
+                margin: 0 20px;
+            }
+            
+        </style>
+    </head>
+        <body>
+            
+            <h1>Stop Watch</h1>
+            <div class="stopwatch">
+               
+                <h2 id="displaytime" >00 : 00 : 00</h2>
+
+                <div class="buttons">
+
+                    <img height="150px" width="150px" src="stopiconwatch.jpg" onclick="watchstop()"><!--stop-->
+                    <img height="150px" width="150px" src="playstopwatch.png" onclick=" watchstart()"><!--start-->
+                    <img height="150px" width="150px" src="reset5.jpg" onclick="watchReset()"><!--reset-->
+
+                </div>
+
+            </div>
+
+
+
+            <script>
+
+                let [seconds,minutes,hours]=[0,0,0]
+                let displaytime=document.getElementById("displaytime")
+                let timer=null
+
+                function stopwatch()
+                {
+                    seconds++;
+                    if(seconds==60)
+                    {
+                        seconds=0
+                        minutes++
+
+                        if(minutes==60)
+                        {
+                            minutes=0
+                            hours++
+                        }
+                    }
+                    
+                    let h = hours<10 ? "0"+ hours: hours
+                    let m = minutes<10 ? "0"+ minutes:minutes
+                    let s=seconds<10 ? "0"+ seconds:seconds
+                    displaytime.innerHTML = h + " : " + m + " : " + s
+                }
+
+                function watchstart()
+                {
+                    if(timer!=null)
+                    {
+                        clearInterval(timer)
+                    }
+                    timer=setInterval(stopwatch,1000)
+                }
+
+                function watchstop()
+                {
+                    clearInterval(timer)
+                }
+
+                function watchReset()
+                {
+                    clearInterval(timer)
+                    displaytime.innerHTML = "00 : 00 : 00";
+                    [hours,minutes,seconds]=[0,0,0]
+                }
+
+            </script>
+        </body>
+   
+</html>
